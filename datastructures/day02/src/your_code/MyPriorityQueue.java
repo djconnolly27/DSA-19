@@ -7,9 +7,11 @@ import java.util.LinkedList;
 public class MyPriorityQueue {
 
     private LinkedList<Integer> priority;
+//    private LinkedList<Integer> dump;
 
     public MyPriorityQueue() {
         priority = new LinkedList<>();
+//        dump = new LinkedList<>();
     }
 
     public void enqueue(int item) {
