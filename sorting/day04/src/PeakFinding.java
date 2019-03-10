@@ -49,13 +49,58 @@ public class PeakFinding {
 
 
     public static int findOneDPeak(int[] nums) {
-        // TODO
-        return 0;
+        if (nums.length == 1) {
+            return 0;
+        }
+        int peak = peakOneD(nums.length/2, nums);
+        if (peak == 0) {
+            return nums.length/2;
+        } else if (peak == -1) {
+            int[] arr = new int[nums.length/2];
+            System.arraycopy(nums, 0, arr, 0, nums.length/2);
+            return findOneDPeak(arr);
+        } else {
+            int[] arr = new int[nums.length - nums.length/2];
+            System.arraycopy(nums, nums.length/2, arr, 0, nums.length - nums.length/2);
+            return findOneDPeak(arr) + nums.length/2;
+        }
     }
 
     public static int[] findTwoDPeak(int[][] nums) {
-        // TODO
-        return null;
+        int loX = 0;
+        int loY = 0;
+        int hiX = nums[0].length;
+        int hiY = nums.length;
+        int curr = 0;
+        int end = nums.length*nums[0].length - 1;
+        int midX, midY = 0;
+        while (curr <= end) {
+            midX = loX + (hiX - loX) / 2;
+            int mY = maxYIndex(midX, loY, hiY, nums);
+            int peakLR = peakX(midX, mY, nums);
+            if (peakLR == 0) {
+                return new int[] {mY, midX};
+            }
+            else if (peakLR == -1) hiX = midX;
+            else if (peakLR == 1) {
+                loX = midX;
+            }
+            midY = loY + (hiY - loY) / 2;
+            int mX = maxXIndex(midY, loX, hiX, nums);
+            int peakUD = peakY(mX, midY, nums);
+            if (peakUD == 0) {
+                return new int[] {midY, mX};
+            }
+            else if (peakUD == -1) {
+                hiY = midY;
+            }
+            else if (peakUD == 1) {
+                loY = midY;
+            }
+            curr++;
+        }
+        return new int[] {0, 0};
+
     }
 
 }
