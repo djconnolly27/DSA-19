@@ -35,19 +35,32 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     // make a left-leaning link lean to the right
     TreeNode<T> rotateRight(TreeNode<T> h) {
-        // TODO
-        return h;
+        TreeNode<T> y = h.leftChild;
+        TreeNode<T> beta = y.rightChild;
+        y.color = h.color;
+        h.color = RED;
+        y.rightChild = h;
+        h.leftChild = beta;
+        return y;
     }
 
     // make a right-leaning link lean to the left
     TreeNode<T> rotateLeft(TreeNode<T> h) {
-        // TODO
-        return h;
+        TreeNode<T> y = h.rightChild;
+        TreeNode<T> beta = y.leftChild;
+        y.color = h.color;
+        h.color = RED;
+        y.leftChild = h;
+        h.rightChild = beta;
+        return y;
     }
 
     // flip the colors of a TreeNode and its two children
     TreeNode<T> flipColors(TreeNode<T> h) {
-        // TODO
+        h.rightChild.color = isRed(h.rightChild) ? BLACK : RED;
+        h.leftChild.color = isRed(h.leftChild) ? BLACK : RED;
+        h.color = isRed(h) ? BLACK : RED;
+        if (h == root) h.color = BLACK;
         return h;
     }
 
@@ -60,20 +73,26 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      * return balanced node
      */
     private TreeNode<T> balance(TreeNode<T> h) {
-        // TODO
+        if (isRed(h.rightChild) && !isRed(h.leftChild)) h = rotateLeft(h);
+        if (isRed(h.leftChild) && isRed(h.leftChild.leftChild)) h = rotateRight(h);
+        if (isRed(h.leftChild) && isRed(h.rightChild)) h = flipColors(h);
         return h;
     }
 
 
     /**
      * Recursively insert a new node into the BST
-     * Runtime: TODO
+     * Runtime: Finding the right spot is O(log(n)). Balancing maxes at
+     * 2 calls to rotate (O(1)) + flipping colors (O(1)). So O(log(n))
      */
     @Override
     TreeNode<T> insert(TreeNode<T> h, T key) {
         h = super.insert(h, key);
-        // TODO: use balance to correct for the three rotation cases
-        return h;
+
+        if (h != null) {
+            return balance(h);
+        }
+        return null;
     }
 
 
@@ -117,7 +136,11 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
     // delete the key-value pair with the given key rooted at h
     TreeNode<T> delete(TreeNode<T> h, T key) {
-        // OPTIONAL TODO
+//        h = super.delete(h, key);
+//
+//        if (h != null) {
+//            return balance(h);
+//        }
         return h;
     }
 
