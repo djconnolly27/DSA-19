@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
@@ -27,9 +28,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
             add(k);
     }
 
+    public List<T> traverse(TreeNode<T> node, List<T> ll) {
+        if (node == null) {
+            return ll;
+        }
+        traverse(node.leftChild, ll);
+        ll.add(node.key);
+        traverse(node.rightChild, ll);
+        return ll;
+    }
+
     public List<T> inOrderTraversal() {
-        // TODO
-        return null;
+        List<T> ll = new ArrayList<>();
+        ll = traverse(root, ll);
+        return ll;
     }
 
     /**
@@ -66,8 +78,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
             replacement = (n.hasRightChild()) ? n.rightChild : n.leftChild; // replacement is the non-null child
         else {
             // Case 3: two children
-            // TODO
-            replacement = null;
+            replacement = findPredecessor(n);
+            delete(replacement);
+            replacement.moveChildrenFrom(n);
         }
 
         // Put the replacement in its correct place, and set the parent.
@@ -102,13 +115,32 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private TreeNode<T> findPredecessor(TreeNode<T> n) {
-        // TODO
+        if (n.hasLeftChild()) {
+            n = n.leftChild;
+            if (!n.hasRightChild()) return n;
+            while (n.hasRightChild()) n = n.rightChild;
+            return n;
+        } else while (!n.isRoot()) {
+            if (n.isRightChild()) return n.parent;
+            n = n.parent;
+            ;
+        }
         return null;
     }
 
     private TreeNode<T> findSuccessor(TreeNode<T> n) {
-        // TODO
+        if (n.hasRightChild()) {
+            n = n.rightChild;
+            if (!n.hasLeftChild()) return n;
+            while (n.hasLeftChild()) n = n.leftChild;
+            return n;
+        } else while (!n.isRoot()) {
+            if (n.isLeftChild()) return n.parent;
+            n = n.parent;
+;
+        }
         return null;
+
     }
 
     /**
