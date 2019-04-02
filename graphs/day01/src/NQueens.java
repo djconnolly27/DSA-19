@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class NQueens {
@@ -37,6 +38,15 @@ public class NQueens {
         return false;
     }
 
+    public static boolean checkColumn(char[][] board, int r, int c) {
+        int y = 0;
+        while (y < board.length) {
+            if (board[y][c] == 'Q') return true;
+            y++;
+        }
+        return false;
+    }
+
 
     /**
      * Creates a deep copy of the input array and returns it
@@ -50,9 +60,32 @@ public class NQueens {
 
 
     public static List<char[][]> nQueensSolutions(int n) {
-        // TODO
-        List<char[][]> answers = new ArrayList<>();
-        return answers;
+        char[][] board = new char[n][n];
+        for (int k = 0; k < board.length; k++) {
+            for (int l = 0; l < board[0].length; l++) {
+                board[k][l] = '.';
+            }
+        }
+        int rowNum = 0;
+        List<char[][]> boards = new LinkedList<char[][]>();
+        queenHelper(board,rowNum,boards);
+        return boards;
+    }
+
+    public static void queenHelper(char[][] board, int rowNum, List<char[][]> boards) {
+        if (rowNum == board.length) {
+            boards.add(copyOf(board));
+        }
+
+        for (int i = 0; i < board[0].length; i++) {
+            if (!checkDiagonal(board,rowNum,i) && !checkColumn(board,rowNum,i)) {
+                board[rowNum][i] = 'Q';
+                queenHelper(board,rowNum+1,boards);
+                board[rowNum][i] = '.';
+            }
+        }
+
+
     }
 
 }
