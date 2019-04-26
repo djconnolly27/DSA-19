@@ -27,6 +27,13 @@ public class SkylineTest {
 
     @Test
     public void one() {
+        List<Skyline.Point> x = Skyline.skyline(buildings(new int[][]{{0, 3, 1}, {1, 2, 3}}));
+        for (int i = 0; i < x.size(); i++) {
+            System.out.println(x.size());
+            System.out.print(x.get(i).x);
+            System.out.println(x.get(i).y);
+            System.out.println();
+        }
         assertSkylineEquals(
                 Skyline.skyline(buildings(new int[][]{{0, 3, 1}, {1, 2, 3}})),
                 new int[][]{{0, 1}, {1, 3}, {2, 1}, {3, 0}}
@@ -35,6 +42,14 @@ public class SkylineTest {
 
     @Test
     public void two() {
+        List<Skyline.Point> x = Skyline.skyline(buildings(new int[][]{{1, 3, 2}, {2, 4, 1}, {3, 5, 4}, {6, 8, 2}, {7, 9, 1}}));
+        for (int i = 0; i < x.size(); i++) {
+            System.out.println(x.size());
+            System.out.print(x.get(i).x);
+            System.out.println(x.get(i).y);
+            System.out.println();
+        }
+
         assertSkylineEquals(
                 Skyline.skyline(buildings(new int[][]{{1, 3, 2}, {2, 4, 1}, {3, 5, 4}, {6, 8, 2}, {7, 9, 1}})),
                 new int[][]{{1, 2}, {3, 4}, {5, 0}, {6, 2}, {8, 1}, {9, 0}}

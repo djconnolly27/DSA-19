@@ -112,17 +112,17 @@ public class RubiksCubeTest {
         assertTrue(r.isSolved());
     }
 
-    @Test
-    public void testSolveRandom() {
-        for (int i = 0; i < 3; i++) {
-            RubiksCube c = RubiksCube.scrambledCube(20);
-            RubiksCube copy = new RubiksCube(c);
-            List<Character> solution = c.solve();
-            System.out.println("Found solution length: " + solution.size());
-            assertTrue(copy.rotate(solution).isSolved());
-            assertTrue(solution.size() <= 14); // any 2x2 rubik's cube can be solved in 14 or less moves
-        }
-    }
+//    @Test
+//    public void testSolveRandom() {
+//        for (int i = 0; i < 3; i++) {
+//            RubiksCube c = RubiksCube.scrambledCube(20);
+//            RubiksCube copy = new RubiksCube(c);
+//            List<Character> solution = c.solve();
+//            System.out.println("Found solution length: " + solution.size());
+//            assertTrue(copy.rotate(solution).isSolved());
+//            assertTrue(solution.size() <= 14); // any 2x2 rubik's cube can be solved in 14 or less moves
+//        }
+//    }
 
     @Test
     public void testSolve5() {

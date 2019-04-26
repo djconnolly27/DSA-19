@@ -109,6 +109,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
      */
     TreeNode<T> insert(TreeNode<T> node, T key) {
         if (node == null) return new TreeNode<>(key);
+//            TreeNode<T> t = new TreeNode<>(key);
+//            t.color = RedBlackTree.RED;
+//            return t;
+//        }
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
             node.leftChild = insert(node.leftChild, key);

@@ -9,7 +9,7 @@ public class LargestSubArray {
         // do this by hashing the value at the current index and then taking the
         // cumulative sum (sum of all elements up to that point). Any time that the hashmap
         // contains two or more values hashed to the same key, you have a subarray to
-        // consider. Then look at the difference between those subarray sizes and pick the point where the
+        // consider. Then look at the difference between those subarray sizesX and pick the point where the
         // difference between the indices of the points that sum to zero is greatest.
         return new int[]{0, 0};
     }

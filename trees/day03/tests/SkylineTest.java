@@ -36,6 +36,11 @@ public class SkylineTest {
 
     @Test
     public void two() {
+        List<Skyline.Point> arr = Skyline.skyline(buildings(new int[][]{{1, 3, 2}, {2, 4, 1}, {3, 5, 4}, {6, 8, 2}, {7, 9, 1}}));
+        for (int i = 1; i < arr.size(); i++) {
+            System.out.print(arr.get(i).x);
+            System.out.println(arr.get(i).y);
+        }
         assertSkylineEquals(
                 Skyline.skyline(buildings(new int[][]{{1, 3, 2}, {2, 4, 1}, {3, 5, 4}, {6, 8, 2}, {7, 9, 1}})),
                 new int[][]{{1, 2}, {3, 4}, {5, 0}, {6, 2}, {8, 1}, {9, 0}}

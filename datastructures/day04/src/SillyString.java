@@ -20,6 +20,8 @@ public class SillyString {
     @Override
     public int hashCode() {
         // TODO What is bad about this hash function??
+        // It only works because the object is immutable
+        // If two strings contain the same letters in any order, their hash codes will be the same.
         int total = 0;
         for (int i=0; i<innerString.length(); i++) {
             total += innerString.charAt(i);

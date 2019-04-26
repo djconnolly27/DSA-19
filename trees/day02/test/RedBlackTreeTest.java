@@ -100,6 +100,7 @@ public class RedBlackTreeTest {
         assertEquals(2, (int) rbt.root.key);
         assertEquals(1, (int) rbt.root.leftChild.key);
         assertEquals(3, (int) rbt.root.rightChild.key);
+        assertEquals(RedBlackTree.BLACK, rbt.root.color);
         assertEquals(RedBlackTree.BLACK, rbt.root.leftChild.color);
         assertEquals(RedBlackTree.BLACK, rbt.root.rightChild.color);
         isRedBlack(rbt);
@@ -132,6 +133,8 @@ public class RedBlackTreeTest {
         for (Integer i: input) {
             rbt.add(i);
         }
+        assertTrue(rbt.is23());
+        assertTrue(rbt.isBalanced());
         isRedBlack(rbt);
         containsCorrectValues(rbt, input);
     }

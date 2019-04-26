@@ -3,7 +3,7 @@ import java.util.HashSet;
 
 public class EdgeWeightedGraph {
     private HashSet<Edge>[] edges; // An array of hashSet. edges[v] is a HashSet of all v's edges
-    private HashSet<Integer> vertices;
+    public HashSet<Integer> vertices;
     private int E;
 
     public EdgeWeightedGraph(int V) { //initialize a graph with V number of  vertices
